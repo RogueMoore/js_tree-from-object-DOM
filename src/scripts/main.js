@@ -2,7 +2,10 @@
 
 const food = {
   Drink: {
-    Wine: {},
+    Wine: {
+      French: {},
+      Moldavian: {},
+    },
     Schnaps: {},
   },
 
@@ -20,8 +23,26 @@ const food = {
 
 const tree = document.querySelector('#tree');
 
+function createEl(tagName) {
+  return document.createElement(tagName);
+}
+
 function createTree(element, data) {
-  // WRITE YOUR CODE HERE
+  if (Object.keys(data) === 0) {
+    return;
+  }
+
+  const list = createEl('ul');
+  element.append(list);
+
+  for (const key in data) {
+    const item = createEl('li');
+
+    item.textContent = key;
+    list.append(item);
+
+    createTree(item, data[key]);
+  }
 }
 
 createTree(tree, food);
